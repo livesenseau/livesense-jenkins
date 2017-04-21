@@ -4,7 +4,7 @@
 ############################################################
 
 # Set the base image to Alpine
-FROM jenkins:2.7.3-alpine
+FROM jenkins:2.46.1-alpine
 
 ############## UPDATE AND INSTALL BINARIES #################
 
