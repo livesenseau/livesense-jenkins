@@ -15,6 +15,22 @@ USER root
 RUN echo "http://dl-4.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories && \
     echo "http://dl-4.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories 
 
+# Install Jenkins Plugins
+RUN install-plugins.sh bitbucket \
+    && install-plugins.sh build-pipeline-plugin \
+    && install-plugins.sh build-timeout \
+    && install-plugins.sh email-ext \
+    && install-plugins.sh github-organization-folder \
+    && install-plugins.sh gradle \
+    && install-plugins.sh greenballs \
+    && install-plugins.sh workflow-aggregator \
+    && install-plugins.sh pipeline-aws \
+    && install-plugins.sh s3 \
+    && install-plugins.sh shared-workspace \
+    && install-plugins.sh ssh-slaves \
+    && install-plugins.sh timestamper \
+    && install-plugins.sh ws-cleanup
+
 # Execute APK commands
 RUN apk update && apk add --no-cache mongodb-tools=r3.2.4-r1 && apk add --no-cache nodejs=6.7.0-r0
 
