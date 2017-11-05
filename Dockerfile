@@ -44,7 +44,7 @@ RUN npm install -g gulp@3.9.1 jasmine@2.5.2 jasmine-reporters@2.2.0 swagger-tool
 ###################### CLEAN CACHES ########################
 
 # Remove cache from package manager    
-RUN npm cache clean
+RUN npm cache clean --force
 
 # Change to default user
 USER jenkins
