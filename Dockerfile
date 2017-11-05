@@ -34,9 +34,9 @@ RUN install-plugins.sh bitbucket \
 
 # Execute APK commands
 RUN apk update \
-    && apk add --no-cache mongodb-tools=r3.4.3-r2 \
-    && apk add --no-cache nodejs=6.10.1-r0 \
-    && apk add --no-cache nodejs-npm=6.10.1-r0
+    && apk add --no-cache mongodb-tools=3.4.9-r0 \
+    && apk add --no-cache nodejs=8.9.0-r0 \
+    && apk add --no-cache nodejs-npm=8.9.0-r0
 
 # Install NPM dependencies
 RUN npm install -g gulp@3.9.1 jasmine@2.5.2 jasmine-reporters@2.2.0 swagger-tools@0.10.1
