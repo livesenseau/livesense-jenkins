@@ -1,20 +1,7 @@
-############################################################
-# Dockerfile to build Jenkins container images
-# Based on Alpine
-############################################################
-
-# Set the base image to Alpine
-FROM jenkins/jenkins:2.87-alpine
-
-############## UPDATE AND INSTALL BINARIES #################
+FROM jenkins/jenkins:lts
 
 # Change to adequate user
 USER root
-
-# Update the repository sources list
-RUN echo "http://dl-4.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories && \
-    echo "http://dl-4.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
-    echo "http://dl-4.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories 
 
 # Install Jenkins Plugins
 RUN install-plugins.sh bitbucket \
@@ -32,19 +19,22 @@ RUN install-plugins.sh bitbucket \
     && install-plugins.sh timestamper \
     && install-plugins.sh ws-cleanup
 
+RUN apt-get update && \
+		apt-get install -y build-essential
+
 # Execute APK commands
-RUN apk update \
-    && apk add --no-cache mongodb-tools=3.4.9-r0 \
-    && apk add --no-cache nodejs=8.9.0-r0 \
-    && apk add --no-cache nodejs-npm=8.9.0-r0
+#RUN apk update \
+#    && apk add --no-cache mongodb-tools=4.0.5-r0 \
+#    && apk add --no-cache nodejs=10.16.3-r0 \
+#    && apk add --no-cache nodejs-npm=10.16.3-r0
 
 # Install NPM dependencies
-RUN npm install -g gulp@3.9.1 jasmine@2.5.2 jasmine-reporters@2.2.0 swagger-tools@0.10.1
+#RUN npm install -g gulp@3.9.1 jasmine@2.5.2 jasmine-reporters@2.2.0 swagger-tools@0.10.1
 
 ###################### CLEAN CACHES ########################
 
-# Remove cache from package manager    
-RUN npm cache clean --force
+# Remove cache from package manager
+#RUN npm cache clean --force
 
 # Change to default user
 USER jenkins
